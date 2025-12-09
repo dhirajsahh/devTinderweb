@@ -5,7 +5,7 @@ const Feed = () => {
   const user = useSelector((state) => state.user);
   return (
     <div>
-      <p>Feed:{user.firstName}</p>
+      <p>Feed:{user?.firstName}</p>
     </div>
   );
 };
