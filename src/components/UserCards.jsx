@@ -2,10 +2,9 @@ import React from "react";
 
 const UserCards = ({ user }) => {
   const { firstName, lastName, photoUrl, age, gender, skills, about } = user;
-  console.log(user);
 
   return (
-    <div className="card bg-base-100 w-96 shadow-sm my-3.5">
+    <div className="card bg-base-300 w-96 shadow-sm">
       <figure>
         <img src={photoUrl} alt="photo" />
       </figure>
