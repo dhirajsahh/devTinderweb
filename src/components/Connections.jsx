@@ -46,8 +46,10 @@ const Connections = () => {
 
                 {c.age && c.gender && (
                   <p className="text-sm opacity-80">
-                    {c.age} •{" "}
-                    {c.gender.charAt(0).toUpperCase() + c.gender.slice(1)}
+                    {c.age +
+                      ", " +
+                      c.gender.charAt(0).toUpperCase() +
+                      c.gender.slice(1)}
                   </p>
                 )}
 

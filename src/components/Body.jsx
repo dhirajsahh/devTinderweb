@@ -30,8 +30,6 @@ const Body = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-
-      {/* Main content grows and pushes footer to bottom */}
       <div className="grow">
         <Outlet />
       </div>

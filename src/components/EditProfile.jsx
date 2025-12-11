@@ -86,12 +86,11 @@ const EditProfile = ({ user }) => {
                       key={g}
                       type="button"
                       onClick={() => setGender(g)}
-                      className={`px-5 py-2 rounded-lg border transition-all duration-200 
-          ${
-            gender === g
-              ? "bg-secondary text-white border-secondary shadow-md scale-105"
-              : "bg-base-200 border-base-300 hover:bg-base-300"
-          }`}
+                      className={`px-5 py-2 rounded-lg border transition-all duration-200 ${
+                        gender === g
+                          ? "bg-secondary text-white border-secondary shadow-md scale-105"
+                          : "bg-base-200 border-base-300 hover:bg-base-300"
+                      }`}
                     >
                       {g.charAt(0).toUpperCase() + g.slice(1)}
                     </button>
