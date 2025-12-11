@@ -5,7 +5,7 @@ import { BASE_URL } from "../utilis/constant";
 import { removeUser } from "../utilis/userSlice";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {

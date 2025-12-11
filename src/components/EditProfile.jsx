@@ -75,24 +75,28 @@ const EditProfile = ({ user }) => {
                 />
               </fieldset>
 
-              <div className="dropdown dropdown-hover w-full mt-4">
-                <div tabIndex={0} role="button" className="btn  w-full">
-                  {gender}
+              <div className="w-full mt-4">
+                <label className="text-xl font-semibold mb-2 block">
+                  Gender
+                </label>
+
+                <div className="flex gap-3">
+                  {["male", "female", "other"].map((g) => (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => setGender(g)}
+                      className={`px-5 py-2 rounded-lg border transition-all duration-200 
+          ${
+            gender === g
+              ? "bg-secondary text-white border-secondary shadow-md scale-105"
+              : "bg-base-200 border-base-300 hover:bg-base-300"
+          }`}
+                    >
+                      {g.charAt(0).toUpperCase() + g.slice(1)}
+                    </button>
+                  ))}
                 </div>
-                <ul
-                  tabIndex="-1"
-                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-                >
-                  <li>
-                    <a onClick={() => setGender("male")}>male</a>
-                  </li>
-                  <li>
-                    <a onClick={() => setGender("female")}>female</a>
-                  </li>
-                  <li>
-                    <a onClick={() => setGender("others")}>others</a>
-                  </li>
-                </ul>
               </div>
 
               <fieldset className="fieldset">

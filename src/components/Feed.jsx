@@ -6,7 +6,7 @@ import { addFeed } from "../utilis/userFeed";
 import UserCards from "./UserCards";
 
 const Feed = () => {
-  const users = useSelector((state) => state.feed);
+  const users = useSelector((store) => store.feed);
 
   const dispatch = useDispatch();
   const getFeed = async () => {
