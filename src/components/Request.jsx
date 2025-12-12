@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utilis/constant";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../utilis/connectionRequest";
+import { addRequest, removeRequest } from "../utilis/connectionRequest";
 
 const Request = () => {
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const dispatch = useDispatch();
   const connectionRequest = useSelector((store) => store.request);
   const connectionRequests = async () => {
@@ -13,11 +14,33 @@ const Request = () => {
         withCredentials: true,
       });
       dispatch(addRequest(response.data.data));
-      console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
+  const handleRequest = async (status, id) => {
+    try {
+      const res = axios.post(
+        BASE_URL + `request/review/${status}/${id}`,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeRequest(id));
+      setToast({
+        show: true,
+        message:
+          status === "accepted"
+            ? "Request accepted successfully."
+            : "Request rejected successfully.",
+        type: status === "accepted" ? "success" : "error",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  setTimeout(() => {
+    setToast({ show: false, message: "", type: "" });
+  }, 3000);
   useEffect(() => {
     connectionRequests();
   }, []);
@@ -64,13 +87,30 @@ const Request = () => {
                 </div>
               </div>
               <div className="flex gap-3">
-                <button className="btn btn-secondary">Accept</button>
-                <button className="btn btn-warning">Reject</button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => handleRequest("accepted", c._id)}
+                >
+                  Accept
+                </button>
+                <button
+                  className="btn btn-warning"
+                  onClick={() => handleRequest("rejected", c._id)}
+                >
+                  Reject
+                </button>
               </div>
             </div>
           );
         })}
       </div>
+      {toast.show && (
+        <div className="toast toast-top toast-center">
+          <div className="alert alert-success">
+            <span>{toast.message}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

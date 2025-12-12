@@ -11,13 +11,15 @@ const Connections = () => {
     const res = await axios.get(BASE_URL + "user/connections", {
       withCredentials: true,
     });
+    console.log(res);
+
     dispatch(addConnection(res.data.data));
   };
   useEffect(() => {
     getConnections();
   }, []);
 
-  if (!connections) return;
+  if (!connections) return <h1>No Connection Found</h1>;
   if (connections.length === 0) return <h1>No Connection Found</h1>;
   return (
     <div className="flex justify-center items-center w-full mt-10">
