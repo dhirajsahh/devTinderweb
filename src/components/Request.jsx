@@ -44,7 +44,12 @@ const Request = () => {
   useEffect(() => {
     connectionRequests();
   }, []);
-  if (!connectionRequest) return <h1>No Reqeust Received</h1>;
+
+  if (!connectionRequest) return;
+  if (connectionRequest.length === 0)
+    return (
+      <h1 className="flex justify-center my-4 text-2xl">No Reqeust Received</h1>
+    );
   return (
     <div className="flex justify-center items-center w-full mt-10">
       <div className="flex flex-col gap-4">

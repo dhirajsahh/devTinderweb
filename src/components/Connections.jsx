@@ -11,7 +11,6 @@ const Connections = () => {
     const res = await axios.get(BASE_URL + "user/connections", {
       withCredentials: true,
     });
-    console.log(res);
 
     dispatch(addConnection(res.data.data));
   };
@@ -19,8 +18,10 @@ const Connections = () => {
     getConnections();
   }, []);
 
-  if (!connections) return <h1>No Connection Found</h1>;
-  if (connections.length === 0) return <h1>No Connection Found</h1>;
+  if (!connections)
+    return <h1 className="text-center text-2xl my-4">No Connection Found</h1>;
+  if (connections.length === 0)
+    return <h1 className="text-center text-2xl my-4">No Connection Found</h1>;
   return (
     <div className="flex justify-center items-center w-full mt-10">
       <div className="flex flex-col gap-4 w-full max-w-2xl">
