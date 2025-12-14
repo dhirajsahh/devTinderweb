@@ -8,6 +8,7 @@ import store from "./utilis/appStore";
 import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/request" element={<Request />} />
               <Route path="/profile" element={<Profiles />} />
             </Route>
+            <Route path="/chat/:targetUserId" element={<Chat />} />
           </Routes>
         </BrowserRouter>
       </Provider>
