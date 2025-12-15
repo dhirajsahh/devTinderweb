@@ -1,21 +1,52 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { BASE_URL } from "../utilis/constant";
+import { io } from "socket.io-client";
 
 const Chat = () => {
-  const targetUserId = useParams();
+  const socket = useMemo(() => io(BASE_URL), []);
+  const [message, setMessage] = useState("");
+  const [room, setRoom] = useState("");
 
+  const sendMessage = () => {
+    socket.emit("sendMessage", { message, room });
+  };
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("connected", socket.id);
+    });
+    socket.on("welcome", (s) => {
+      console.log(s);
+    });
+    socket.on("receiveMessage", (mes) => {
+      console.log(mes);
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   return (
-    <div className="w-1/2 mx-auto m-5  border border-b-gray-200 h-[76vh] flex flex-col">
-      <h1 className="text-center text-2xl border-b border-b-gray-200">Chat</h1>
-      <div className="flex-1 overflow-scroll p-5"></div>
-      <div className="border-t border-b-gray-400 flex gap-2">
+    <div>
+      <fieldset className="fieldset">
         <input
           type="text"
-          className="input flex-1 border border-gray-500 text-white rounded p-2 "
-          placeholder="message"
+          className="input"
+          placeholder="FirstName"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <button className="btn btn-primary">send</button>
-      </div>
+      </fieldset>
+      <fieldset className="fieldset">
+        <input
+          type="text"
+          className="input"
+          placeholder="room"
+          value={room}
+          onChange={(e) => setRoom(e.target.value)}
+        />
+      </fieldset>
+      <button className="btn bg-pink-600" onClick={sendMessage}>
+        Click me
+      </button>
     </div>
   );
 };

@@ -61,6 +61,7 @@ const Connections = () => {
                   <p className="text-sm text-base-content/70">{c.about}</p>
                 )}
               </div>
+
               <Link to={"/chat/" + c._id}>
                 <button className="btn btn-accent">Chat</button>
               </Link>
